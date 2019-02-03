@@ -1,2 +1,2 @@
-# sorting
-sorting algorithms
+# algorithms
+
