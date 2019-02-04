@@ -15,6 +15,7 @@ int main() {
     
     for (int i = 0; i < length; i++) {
         smallestI = i;
+        // i + 1 because starting at i would be comparing itself
         for (int j = i+1; j < length; j++) {
             if (nums[j] < nums[smallestI]) {
                 smallestI = j;
