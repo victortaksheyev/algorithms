@@ -1,10 +1,3 @@
-//
-//  main.cpp
-//  philChecker
-//
-//  Created by Victor Taksheyev on 2/4/19.
-//  Copyright © 2019 Victor Taksheyev. All rights reserved.
-//
 
 #include <iostream>
 #include <string>
