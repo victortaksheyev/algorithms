@@ -3,6 +3,9 @@
 
 using namespace std;
 
+const int BEGINNING = 0;
+const int END = 1;
+
 // template <class myT>
 struct NodeType {
     NodeType() {
@@ -21,12 +24,12 @@ class List {
         List();
         void Insert(const int& item);
         void printForward(NodeType* head) const;
+        void backwardsPrint(NodeType* tail) const;
         
         NodeType* getFirstNode()const {return firstNode;}
         NodeType* getLastNode()const {return lastNode;}
 
-
-    // private:
+    private:
         int numNodes;
         NodeType *firstNode;
         NodeType *lastNode;
@@ -66,10 +69,19 @@ void List::printForward(NodeType* head) const {
     if (head == lastNode) {
         cout << head->data;
         return;
-    }
-    else {
+    } else {
         cout << head->data << "->";
         printForward(head->next);
+    }
+}
+
+void List::backwardsPrint(NodeType* tail) const {
+    if (tail == firstNode) {
+        cout << tail->data;
+        return;
+    } else {
+        cout << tail->data << "->";
+        backwardsPrint(tail->prev);
     }
 }
 
@@ -100,15 +112,12 @@ int main (int argc, char *argv[]) {
         for (int i = 0; i < numItems+1; i++) {
             if (i == 0){ l[count].Insert(numItems);
                 cout << numItems << " ";
-            }
-            
-            else {
+            } else {
                 int data; 
                 inputFile >> data;
                 cout << data << " ";
                 l[count].Insert(data);
             }
-            
         }
         cout << endl;
         count++;
@@ -119,12 +128,14 @@ int main (int argc, char *argv[]) {
         arr[i][1] = l[i].getLastNode();
     }
 
-
-    // for (int i = 0; i < numberOfLists; i++) {
-    //     cout << ((l[i].getFirstNode())->data);
-    // }
+    cout << "Forwards Printing" << endl;
     for (int i = 0; i < numberOfLists; i++) {
-        l[i].printForward(arr[i][0]);
+        l[i].printForward(arr[i][BEGINNING]);
+        cout << endl;
+    }
+    cout << "Backwards Printing Below" << endl;
+    for (int i = 0; i < numberOfLists; i++) {
+        l[i].backwardsPrint(arr[i][END]);
         cout << endl;
     }
     
