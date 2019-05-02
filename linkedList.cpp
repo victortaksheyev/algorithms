@@ -1,6 +1,7 @@
  /*
     * Description: Linked list that can 
     * Input: formated input file passed as command line arg
+    * ./a.out input.txt
     * Output: console input with choices/output of choices
 */
 
