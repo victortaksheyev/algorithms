@@ -2,58 +2,55 @@
 #include <iostream>
 #include <string>
 
-int WAYS_TO_WRITE = 0;
+const int NUM_OF_CONNECTIVES = 3;
+const char connectives[NUM_OF_CONNECTIVES] = {'&', '|', '-'};
+
+
 
 using namespace std;
 
-void algorithm(int& WAYS_TO_WRITE, string formula);
-void findConnectives(string formula);
+int numConnectives(string wff, char operators[][2]);
 
 int main() {
-    string formula = "-PvQ";
-    
-    algorithm(WAYS_TO_WRITE, formula);
-    findConnectives(formula);
-    
-    return 0;
+    string wff;
+    char operators[10][2];
+
+    cin >> wff;
+    // cout << "the number of connectives is: " << numConnectives(wff, operators) << endl;
+    for (int i = 0; i < numConnectives(wff, operators); i++) {
+        cout << operators[i][0] << " ";
+        cout << "index: " << operators[i][1];
+    }
 }
 
 
-void algorithm(int& WAYS_TO_WRITE, string formula) {
+// A|B
+
+// addParen()
+// find the connective
+// move one to the left and add parenths
+// move one to the right and add parenths
+// if there are already parenthesis, move 5 to the left/right
+
+void addParen(string wff, char **operators, int numOpers) {
+    int currentOperator = 0;
+    if (currentOperator == numOpers+1) return;
+    else {
+        wff[operators[]]
+    }
+}
+
+// scans wff and returns number of connectives
+int numConnectives(string wff, char operators[][2]) {
     int count = 0;
-    for (int i = 0; i < formula.length(); i++) {
-        count++;
+    for (int i = 0; i < wff.length(); i++) {
+        for (int j = 0; j < NUM_OF_CONNECTIVES; j++) {
+            if (wff[i] == connectives[j]) {
+                operators[count][0] = wff[i]; 
+                operators[count][1] = i+48;    // storing the array at which the operator is at
+                count++;
+            }
+        }
     }
-//    cout << count;
+    return count;
 }
-
-void findConnectives(string formula) {
-    int connectives;
-    int len = formula.length();
-    string connectivesArr[len][2];
-    
-    
-    
-    for (int i = 0; i<len; i++) {
-        for (int j =0; j<2; j++) {
-            connectivesArr[i][j] = "x";
-        }
-    }
-    for (int i = 0; i < len; i++) {
-        if (formula[i] == '-' || formula[i] == '&' || formula[i] == 'v') {
-            connectives++;
-            connectivesArr[i][0] = to_string(i); // inputs the index of connective
-            connectivesArr[i][1] = formula[i]; // inputs the connective
-        }
-    }
-    
-    for (int i = 0; i<len; i++) {
-        for(int j =0; j<2; j++) {
-            cout << connectivesArr[i][j] << " ";
-        }
-        cout << endl;
-    }
-    
-}
-
-
