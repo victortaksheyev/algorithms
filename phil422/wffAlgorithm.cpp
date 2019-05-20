@@ -53,4 +53,3 @@ int numConnectives(string wff, char operators[][2]) {
         }
     }
     return count;
-}
