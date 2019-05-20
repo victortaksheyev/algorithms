@@ -3,6 +3,7 @@ wff = input("Enter a formula: ")
 
 
 indexes = []
+psets = 0               #   sets of parentheses
 # string = a v b v c
 
 #finds first operator within the wff and returns its index
@@ -17,6 +18,43 @@ def findOperator(wff):
                     indexes.append(i)                   # keeps track of which operators have already been used
                     return i
 
+# arguments are wff and index of the connective
+# returns index of far left paren
+def parenLeft(wff, index):
+    pcount = 0;
+    # count how many parenthesis you see
+    while wff[index - 2] != '(':            # while it's not the first closing
+        if wff[index - 1] == ")":
+            pcount+=1                      # increment the number of parenthesis you've come across
+        index -=1                          # move to the left
+
+    # then count backwards in with the closing parentheses
+    while pcount != 0:
+        if wff[index - 1] == '(':
+            pcount-=1                       # we found a match
+        index-=1
+
+    return index                             # return where the last paren is as the start
+
+# arguments are wff and index of the connective
+# returns index of far right paren
+def parenRight(wff, index):
+    pcount = 0
+    # count how many parenthesis you see
+    while wff[index] != ')':            # while it's not the first closing
+        if wff[index] == "(":
+            pcount+=1
+        index += 1
+    # return index
+    
+     # count backwards, considering the closing parenths
+    while pcount != 0:
+        if wff[index] == ')':
+            pcount -= 1
+        index += 1
+
+    return index-1                      # figure this out later
+
 # returns a subWff
 def subWff(mainwff, index):
     subW = ''
@@ -27,7 +65,17 @@ def subWff(mainwff, index):
         # if operator is negation
         # ...
         # ...
+        # if to the left is a parenthesis
+        
+        if index - 1 >= 0 and mainwff[index-1]==')':
+            return parenLeft(mainwff, index)
 
+
+        if index + 1 <= len(mainwff) and mainwff[index+1] == '(':
+            print("we are in the right")
+            return parenRight(mainwff, index)
+                                
+        # check for paren on the right
         # need to create a string that contains character before the index to the character after the index
         # take into consideration the presence of negation, treat it as part of wff
         if index - 2 >= 0:
@@ -57,7 +105,7 @@ def subWff(mainwff, index):
 #           start of the subwff
 #           end of 
 def rejoinWff(wff, subwff, start, end):
-    returnwff = subWff
+    returnwff = subwff
     # joining from the left
     if start != 0:
         # ex)   wff     =     b v c
@@ -75,14 +123,30 @@ def addP(wff):
     return '('+wff+')'
 
 # * expands the tuple
-print("Index",indexes)
-# print(addParenths(subWff(wff, findOperator(wff))))
-print("Index",indexes)
+# twff, start, end = subWff(wff, findOperator(wff))
+# twff = addP(twff)
 
-subWff, start, end = subWff(wff, findOperator(wff))
-subWff = addP(subWff)
+# # print(rejoinWff(wff, addP(subWff), start, end))
+# rejoined = rejoinWff(wff, twff, start, end)
 
-print(rejoinWff(wff, addP(subWff), start, end))
+# print(rejoined)
+# print(indexes)
+
+# twff, start, end = subWff(rejoined, findOperator(rejoined))
+
+# print(twff)
+
+# # print(toP)
 
 
+# test for left paren -------------
+# wff: av((avb)vc)vd
+# index: 9
+# pcount should be 2
+
+# test for right paren -------------
+# wff: av((avb)vc)
+# index: 11
+# pcount should be 10
+print("pcount", subWff(wff, 1))
 
