@@ -68,12 +68,20 @@ def subWff(mainwff, index):
         # if to the left is a parenthesis
         
         if index - 1 >= 0 and mainwff[index-1]==')':
-            return parenLeft(mainwff, index)
-
+            right = index+1
+            left = parenLeft(mainwff, index)
+            if mainwff[index+1] == '-':
+                right = index+2
+            subW = mainwff[left:right+1]
+            return (subW, start, end)
 
         if index + 1 <= len(mainwff) and mainwff[index+1] == '(':
-            print("we are in the right")
-            return parenRight(mainwff, index)
+            left = index - 1
+            if mainwff[index-2] == '-':
+                left = index - 2
+            right = parenRight(mainwff, index)
+            subW = mainwff[left:right+1]
+            return (subW, start, end)
                                 
         # check for paren on the right
         # need to create a string that contains character before the index to the character after the index
@@ -101,6 +109,8 @@ def subWff(mainwff, index):
             end = index+1
     return (subW, start, end)
 
+
+
 # params:   main wff (user entered)
 #           start of the subwff
 #           end of 
@@ -119,7 +129,7 @@ def rejoinWff(wff, subwff, start, end):
 
 # takes in a string to add opening and closing parenths to
 def addP(wff):
-    indexes[-1] += 1
+    # indexes[-1] += 1
     return '('+wff+')'
 
 # * expands the tuple
@@ -145,8 +155,9 @@ def addP(wff):
 # pcount should be 2
 
 # test for right paren -------------
-# wff: av((avb)vc)
-# index: 11
-# pcount should be 10
-print("pcount", subWff(wff, 1))
+# wff: av(avb)vc
+# index: 1
+# output should be av(avb)
+twff, start, end = subWff(wff, 1)
+print(addP(twff))
 
