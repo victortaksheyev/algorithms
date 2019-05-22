@@ -1,7 +1,6 @@
 connectives = ['v', '>', '&', '~']
 wff = input("Enter a formula: ")
 
-
 indexes = []
 psets = 0               #   sets of parentheses
 # string = a v b v c
