@@ -92,8 +92,6 @@ def rec(wff):
             print("(" + str(leftW) + wff[opIndex] + str(rightW)+")")
         # return ("("+left+ wff[opIndex] +right+")")
 
-# https://www.geeksforgeeks.org/print-all-combinations-of-balanced-parentheses/
-
 indexes = []
 for i in range(numConnectives(wff)):
     opIndex = findConnective(wff, indexes)
@@ -109,41 +107,6 @@ for i in range(numConnectives(wff)):
     # str(rec(left)) + str(rec(right))
     print("(" + str(rec(left)) + wff[opIndex] + str(rec(right)) + ")")
 
-# (2n choose n) / (n -1)
-
-
-# import java.util.Scanner;
-#
-# public class Parentheses
-# {
-#
-#     static void ParCheck(int left,int right,String str)
-#     {
-#             if (left == 0 && right == 0)
-#             {
-#                     System.out.println(str);
-#             }
-#
-#             if (left > 0)
-#             {
-#                     ParCheck(left-1, right+1 , str + "(");
-#             }
-#             if (right > 0)
-#             {
-#                     ParCheck(left, right-1, str + ")");
-#             }
-#
-#     }
-#     public static void main(String[] args)
-#     {
-#             Scanner input=new Scanner(System.in);
-#             System.out.println("Enter the  number");
-#             int num=input.nextInt();
-#
-#             String str="";
-#             ParCheck(num,0,str);
-#     }
-# }
 
 # A>B>C>D
 
